@@ -48,6 +48,24 @@ li {
     padding: 7px;
 }
 
+.btn-sucesso {
+    border-radius: 2px solid #4CAF50;
+    border-radius: 5px;
+    color: #FEf4f4;
+    padding: 5px 10px;
+    font-size: large;
+    background-color: #4CAF50;
+}
+
+.btn-abandonar{
+    border-radius: 2px solid #555555;
+    border-radius: 5px;
+    color: #FEf4f4;
+    padding: 5px 10px;
+    font-size: large;
+    background-color: #555555;
+}
+
 #popup {
   display: none;
   position: fixed;
