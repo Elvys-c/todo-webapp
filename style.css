@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: hsla(89, 43%, 51%, 0.3);
+}
+
 li {
     color: #FEf4f4;
     background-color: #503A3A;
@@ -11,6 +15,8 @@ li {
 .lado-esquerdo{
     background-color: #FEf4f4;
     width: 30%;
+    height: 500px;
+    position: relative;
 }
 
 .lado-direito{
@@ -43,9 +49,30 @@ li {
 .btn-div{
     display: table-cell;
     width: 150px;
-    border: #0f4bf0 solid 1px;
+    border: #2E2828 solid 1px;
     margin: 5px;
     padding: 7px;
+    border-radius: 15px;
+}
+
+.btn-div-ativo {
+    background-color: #503A3A;
+    display: table-cell;
+    width: 150px;
+    border: #FEf4f4 solid 1px;
+    margin: 5px;
+    padding: 7px;
+    border-radius: 15px;
+    color: #FEf4f4;
+}
+
+.btn-acao{
+    border-radius: 2px solid #008CBA;
+    border-radius: 5px;
+    color: #FEf4f4;
+    padding: 5px 10px;
+    font-size: large;
+    background-color: #008CBA;
 }
 
 .btn-sucesso {
@@ -57,6 +84,7 @@ li {
     background-color: #4CAF50;
 }
 
+
 .btn-abandonar{
     border-radius: 2px solid #555555;
     border-radius: 5px;
@@ -64,6 +92,20 @@ li {
     padding: 5px 10px;
     font-size: large;
     background-color: #555555;
+}
+
+.div-no-pe{
+    position: absolute;
+    bottom: 0;
+}
+
+.menu-vertical{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 #popup {
@@ -75,7 +117,7 @@ li {
   background-color: white;
   border: 1px solid black;
   padding: 20px;
-  width: 300px;
+  width: 400px;
   z-index: 9999;
 }
 
@@ -89,4 +131,24 @@ li {
 
 #closePopup {
   margin-top: 20px;
+}
+
+.span-icone-cocluida{
+    background-color: #f44336;
+    float: right;
+    margin: 0px 2px;
+}
+
+.span-icone-editar{
+    background-color: #4CAF50;
+    float: right;
+    margin: 0px 2px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
 }
