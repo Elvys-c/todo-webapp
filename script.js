@@ -19,7 +19,8 @@ class Usuario {
 
 // localStorage.clear();
 
-var usuario = (localStorage.getItem("teste")) ? buscaUsuario("teste") : cadastraUsuario();
+const usuario = (localStorage.getItem("teste")) ? buscaUsuario("teste") : cadastraUsuario();
+var listaAtual = 'ativas';
 
 function novaTarefa() {
     var novaTarefa = document.querySelector('#novaTarefa');       
@@ -32,7 +33,6 @@ function novaTarefa() {
 }
 
 function tarefasTodas() {
-    var usuario = JSON.parse(localStorage.getItem("teste"));
     var lista = document.querySelector('#listaTarefas');
     var itemLista = null;
     var tarefas = usuario.todasTarefas;
@@ -43,7 +43,9 @@ function tarefasTodas() {
         
         itemLista = document.createElement('li');
         itemLista.innerHTML = tarefas[i].descricaoAtividade;
+        itemLista.style.textDecoration = (tarefas[i].status == 'ativa') ? 'none' : 'line-through';
         itemLista.id = tarefas[i].idTarefa;
+        itemLista.dataset.status = tarefas[i].status;
 
         iconeEditar = document.createElement('span');
         iconeEditar.innerHTML = "edit";
@@ -61,10 +63,11 @@ function tarefasTodas() {
         lista.appendChild(itemLista);
     }
 
+    listaAtual = 'todas';
+
 }
 
 function tarefasAtivas() {
-    var usuario = JSON.parse(localStorage.getItem("teste"));
     var lista = document.querySelector('#listaTarefas');
     var itemLista = null;
     var tarefas = usuario.todasTarefas;
@@ -77,6 +80,7 @@ function tarefasAtivas() {
             itemLista = document.createElement('li');
             itemLista.innerHTML = tarefas[i].descricaoAtividade;
             itemLista.id = tarefas[i].idTarefa;
+            itemLista.dataset.status = tarefas[i].status;
             
             iconeEditar = document.createElement('span');
             iconeEditar.innerHTML = "edit";
@@ -94,10 +98,11 @@ function tarefasAtivas() {
             lista.appendChild(itemLista);
         }
     }
+
+    listaAtual = 'ativas';
 }
 
 function tarefasCompletas() {
-    var usuario = JSON.parse(localStorage.getItem("teste"));
     var lista = document.querySelector('#listaTarefas');
     var itemLista = null;
     var tarefas = usuario.todasTarefas;
@@ -110,7 +115,9 @@ function tarefasCompletas() {
             
             itemLista = document.createElement('li');
             itemLista.innerHTML = tarefas[i].descricaoAtividade;
+            itemLista.style.textDecoration = 'line-through';
             itemLista.id = tarefas[i].idTarefa;
+            itemLista.dataset.status = tarefas[i].status;
             
             iconeEditar = document.createElement('span');
             iconeEditar.innerHTML = "edit";
@@ -128,13 +135,24 @@ function tarefasCompletas() {
             lista.appendChild(itemLista);
         }
     }
+
+    listaAtual = 'completas';
 }
 
 function mostraDiv(itemListaId) {
-    var itemLista = document.getElementById(itemListaId).firstChild;
+    var itemLista = document.getElementById(itemListaId);
+    var inputsRadios = document.querySelectorAll('#inputRadioAtiva, #inputRadioCompleta');
     var inputNovaDescricao = document.querySelector('#novaDescricao');
         inputNovaDescricao.setAttribute('idLista', itemListaId);
-        inputNovaDescricao.value = itemLista.data;
+        inputNovaDescricao.value = itemLista.firstChild.data;
+
+
+    for (const inputRadio of inputsRadios) {
+        if (itemLista.dataset.status === inputRadio.value) {
+            inputRadio.checked = "checked";
+            break;
+        }
+    }
 
     document.getElementById("popup").style.display = "block";
     
@@ -160,12 +178,16 @@ function removeItemLi(tarefaId) {
 
 function atualizaLi() {
     var inputNovaDescricao = document.querySelector('#novaDescricao');
-    var inputStatus = document.querySelectorAll('#inputRadioAtiva, #inputRadioCompleto');
+    var inputStatus = document.querySelectorAll('#inputRadioAtiva, #inputRadioCompleta');
     var idDoItemDaLista = inputNovaDescricao.getAttributeNode("idLista").value;
     var itemLista = document.getElementById(idDoItemDaLista);
-    var usuario = JSON.parse(localStorage.getItem(usuario.login));
     
-    log(inputStatus);
+    for (const input of inputStatus) {
+        if(input.checked){
+            inputStatus = input.value;
+            break;
+        }
+    }
     
     if (!inputNovaDescricao.value == '') {
 
@@ -174,12 +196,21 @@ function atualizaLi() {
         for(let i = 0; i < usuario.todasTarefas.length; i++) {
             if (usuario.todasTarefas[i].idTarefa == idDoItemDaLista) {
                 
-                usuario.todasTarefas[i].descricaoAtividade = inputNovaDescricao.value;                
-                localStorage.setItem("teste", JSON.stringify(usuario));
+                usuario.todasTarefas[i].descricaoAtividade = inputNovaDescricao.value;
+                usuario.todasTarefas[i].status = inputStatus;                
+                localStorage.setItem(usuario.login, JSON.stringify(usuario));
             }
         }
+    }
+    
+    escondeDiv();
 
-        escondeDiv();
+    if (listaAtual === 'completas') {
+        tarefasCompletas();
+    }else if(listaAtual === 'ativas'){
+        tarefasAtivas();
+    }else if(listaAtual === 'todas'){
+        tarefasTodas();
     }
 }    
 
