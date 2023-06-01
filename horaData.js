@@ -35,4 +35,4 @@ switch (tempo.getDay()) {
         break;
 }
 
-spanDiaMesAno.innerHTML = tempo.getDate()+"/"+tempo.getMonth()+"/"+tempo.getFullYear();
+spanDiaMesAno.innerHTML = tempo.getDate()+"/"+(tempo.getMonth() + 1)+"/"+tempo.getFullYear();
