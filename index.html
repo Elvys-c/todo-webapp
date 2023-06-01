@@ -11,12 +11,12 @@
     <title>Document</title>
 </head>
 <body onload="pesquisaClima()">
-    <header>Header...</header>
-    <main>
+    <header class="header">Lista de Tarefas</header>
+    <main class="main">
         <div class="row">
             
             <div class="coluna lado-esquerdo">
-                <div>
+                <div class="div-dia">
                     <span id="dia-semana"></span>
                     <span id="dia-mes-ano"></span>
                 </div>
@@ -32,11 +32,11 @@
                         <button class="btn-div" onclick="tarefasCompletas(); efeitoBtn(this)" id="tarefasCompletas">Tarefas Compĺetas</button>
                     </div>
                 
-                    <form action="none">
-                        <input type="text" name="novaTarefa" id="novaTarefa" placeholder="digite a nova tarefa">
-                    </form>
-                    <div>
-                        <button class="btn-acao" onclick="novaTarefa()">ADICIONAR TAREFA</button>
+                    <div class="div-adiciona-nova-tarefa">
+                        <input type="text" class="input-adiciona-nova-tarefa" name="novaTarefa" id="novaTarefa" placeholder="NOVA TAREFA">
+                        <button class="btn-adiciona-nova-tarefa" onclick="novaTarefa()">
+                            &#x2b;
+                        </button>
                     </div>
                 </div>
 
@@ -44,10 +44,8 @@
 
                 <div class="div-no-pe">
                     <div class="" id="clima">
-    
                     </div>
                     <div class="" id="temperatura">
-    
                     </div>
                 </div>
             </div>
@@ -78,7 +76,7 @@
         </div>
     </main>
     
-    <footer>Footer...</footer>
+    <footer class="footer">Desenvolvido Por: Elvys, Hugo, Muliro, Pedro</footer>
 </body>
 <script src="horaData.js"></script>
 <script src="clima.js"></script>
