@@ -11,23 +11,53 @@ class Usuario {
     senha = '';
     todasTarefas = [];
     
-    constructor (login, senha){
-        this.login = login;
+    constructor (log, senha){
+        this.login = log;
         this.senha = senha;
     }
 }
 
-// localStorage.clear();
-
-const usuario = (localStorage.getItem("teste")) ? buscaUsuario("teste") : cadastraUsuario();
 var listaAtual = 'ativas';
+
+function buscaUsuario(usuarioLogin){
+    return JSON.parse((localStorage.getItem(usuarioLogin)));
+}
+
+function pagCadastro(){
+    location.href="cadastro.html"
+}
+
+function cadastrar(){
+    let log=document.getElementById("enterLogin").value;
+    let senha=document.getElementById("enterPass").value;
+    let user = new Usuario(log, senha);
+
+    localStorage.setItem(user.login, JSON.stringify(user));
+
+    location.href="login.html"
+}
+
+function login(){
+    let loginVal=document.getElementById("login").value;
+    let passVal=document.getElementById("password").value;
+    let tmpUser = JSON.parse(localStorage.getItem(loginVal));
+    
+    if (tmpUser && tmpUser.senha === passVal) {
+        sessionStorage.user = loginVal;
+        location.href = "index.html";
+    }else{
+        alert("Falha de login.");
+    }
+}
 
 function novaTarefa() {
     var novaTarefa = document.querySelector('#novaTarefa');       
     var itemTarefa = new ItemTarefa(novaTarefa.value, 'ativa');
-
-    usuario.todasTarefas.push(itemTarefa);
-    localStorage.setItem(usuario.login, JSON.stringify(usuario));
+    var tmpUserario = JSON.parse(localStorage.getItem(sessionStorage.user));
+    
+    tmpUserario.todasTarefas.push(itemTarefa);
+    console.log(tmpUserario);
+    localStorage.setItem(tmpUserario.login, JSON.stringify(tmpUserario));
     
     tarefasAtivas();
 }
@@ -35,7 +65,7 @@ function novaTarefa() {
 function tarefasTodas() {
     var lista = document.querySelector('#listaTarefas');
     var itemLista = null;
-    var tarefas = usuario.todasTarefas;
+    var tarefas = JSON.parse(localStorage.getItem(sessionStorage.user)).todasTarefas;
 
     lista.replaceChildren();
 
@@ -70,7 +100,7 @@ function tarefasTodas() {
 function tarefasAtivas() {
     var lista = document.querySelector('#listaTarefas');
     var itemLista = null;
-    var tarefas = usuario.todasTarefas;
+    var tarefas = JSON.parse(localStorage.getItem(sessionStorage.user)).todasTarefas;
 
     lista.replaceChildren();
 
@@ -105,7 +135,7 @@ function tarefasAtivas() {
 function tarefasCompletas() {
     var lista = document.querySelector('#listaTarefas');
     var itemLista = null;
-    var tarefas = usuario.todasTarefas;
+    var tarefas = JSON.parse(localStorage.getItem(sessionStorage.user)).todasTarefas;
 
     lista.replaceChildren();
 
@@ -181,6 +211,7 @@ function atualizaLi() {
     var inputStatus = document.querySelectorAll('#inputRadioAtiva, #inputRadioCompleta');
     var idDoItemDaLista = inputNovaDescricao.getAttributeNode("idLista").value;
     var itemLista = document.getElementById(idDoItemDaLista);
+    let usuario = JSON.parse(localStorage.getItem(sessionStorage.user));
     
     for (const input of inputStatus) {
         if(input.checked){
@@ -218,14 +249,6 @@ function escondeDiv() {
     document.getElementById("popup").style.display = "none";
 }
 
-function buscaUsuario(usuarioLogin){
-    return JSON.parse((localStorage.getItem(usuarioLogin)));
-}
-
-function cadastraUsuario(){
-    var novoUsuario = new Usuario("teste", "123", [])
-    localStorage.setItem(novoUsuario.login, JSON.stringify(novoUsuario));
-}
 
 function efeitoBtn(btnClicado){
     var todosBtn = document.querySelectorAll('#tarefasTodas, #tarefasAtivas, #tarefasCompletas');
@@ -238,4 +261,9 @@ function efeitoBtn(btnClicado){
         }
     }
 
+}
+
+function sair() {
+    sessionStorage.clear();
+    location.href = "login.html";
 }
