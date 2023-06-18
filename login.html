@@ -4,27 +4,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/login_cadastra.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="script.js"></script>
     
     <title>Login</title>
 </head>
 <body>
-    
-    <form>
-        <h3>Login</h3>
-        <input type="text" placeholder="Login" id="login">
-        <input type="password" placeholder="password" id="password">
-    </form>   
-    
-    <button type="button" onclick="login();">logar</button>
-    <button type="button" onclick="pagCadastro();">cadastro</button>
 
+    <div>
+        <section class="container grid grid-columns">
+            
+            <div class="content"></div>
+            <div class="content">
+                <h3 class="titulo-pagina">LOGIN</h3>
+            </div>
+            <div class="content"></div>
+
+            <div class="content"></div>
+            <div class="content div-aviso" id="div-aviso">
+                <p id="aviso-mensagem">msg</p>
+            </div>
+            <div class="content"></div>
+            
+            <div class="content"></div>
+            <div class="content">
+                <input type="text" placeholder="Login" id="login">
+            </div>
+            <div class="content"></div>
+            
+            <div class="content"></div>
+            <div class="content">
+                <input type="password" placeholder="password" id="password">
+            </div>
+            <div class="content"></div>
+
+            <div class="content"></div>
+            <div class="content">
+                <div class="">
+                    <button type="button" class="btn btn-sucesso" onclick="login();">Entrar</button>
+                    <button type="button" class="btn btn-redireciona" onclick="pagCadastro();">cadastrar</button>
+                </div>
+            </div>
+            <div class="content"></div>
+
+        </section>
+    </div>
 
 </body>
 
-
-</body>
-</body
 </html>
