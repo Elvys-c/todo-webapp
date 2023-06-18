@@ -16,6 +16,7 @@ li {
     border-radius: 5px;
     text-align: center;
     line-height: 40px;
+    border: 2px solid #FEf4f4;
 }
 
 .header {
@@ -61,6 +62,7 @@ li {
     background-color: #2E2828;
     width: 70%;
     height: 500px;
+    overflow: auto;
 }
 
 .row:after {

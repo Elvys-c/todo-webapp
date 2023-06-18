@@ -191,19 +191,19 @@ function mostraDiv(itemListaId) {
 function removeItemLi(tarefaId) {
     var tarefaARemover = document.getElementById(tarefaId);
     var lista = document.getElementById('listaTarefas');
+    var usuario = JSON.parse(localStorage.getItem(sessionStorage.user));
     var todasTarefas = usuario.todasTarefas;
-    
-    
+
     for(let i = 0; i < todasTarefas.length; i++){
         if (todasTarefas[i].idTarefa === tarefaId) {
-            
+
             todasTarefas.splice(i, 1);
             break;
         }
     }
-    
+
     lista.removeChild(tarefaARemover);
-    localStorage.setItem(usuario.login, JSON.stringify(usuario));
+    localStorage.setItem(sessionStorage.user, JSON.stringify(usuario));
 }
 
 function atualizaLi() {
