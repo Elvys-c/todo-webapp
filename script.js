@@ -38,15 +38,17 @@ function cadastrar(){
 }
 
 function login(){
-    let loginVal=document.getElementById("login").value;
-    let passVal=document.getElementById("password").value;
+    let loginVal = (document.getElementById("login").value) ? document.getElementById("login").value : false ;
+    let passVal = document.getElementById("password").value ? document.getElementById("password").value : false;
     let tmpUser = JSON.parse(localStorage.getItem(loginVal));
-    
+
     if (tmpUser && tmpUser.senha === passVal) {
         sessionStorage.user = loginVal;
         location.href = "index.html";
+    }else if(!loginVal || !passVal){
+        aviso("Favor informar login e senha");
     }else{
-        alert("Falha de login.");
+        aviso('Erro de Credenciais.');
     }
 }
 
@@ -261,6 +263,16 @@ function efeitoBtn(btnClicado){
         }
     }
 
+}
+
+function aviso(msg){
+    let div = document.querySelector('#div-aviso');
+    let p = document.querySelector('#aviso-mensagem');
+
+    div.style.visibility = 'visible';
+    p.innerHTML = msg;
+
+    setTimeout(() => { div.style.visibility = 'hidden' }, 5000);
 }
 
 function sair() {
