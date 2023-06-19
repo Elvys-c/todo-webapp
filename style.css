@@ -33,6 +33,20 @@ li {
     line-height: 50px;
 }
 
+.div-display-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-sair {
+    background-color: #2e282e;
+    border: 2px solid #FEf4f4;
+    border-radius: 5px;
+    color: #FEf4f4;
+    font-size: large;
+}
+
+
 .main {
     margin: 50px auto auto;
     width: 90%;
