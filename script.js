@@ -275,6 +275,11 @@ function aviso(msg){
     setTimeout(() => { div.style.visibility = 'hidden' }, 5000);
 }
 
+function exibeNomeUsuario() {
+    let span = document.querySelector('#span-nome-usuario');
+    span.innerHTML = "Olá "+sessionStorage.user;
+}
+
 function sair() {
     sessionStorage.clear();
     location.href = "login.html";
