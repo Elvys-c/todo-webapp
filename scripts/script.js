@@ -27,14 +27,28 @@ function pagCadastro(){
     location.href="cadastro.html"
 }
 
-function cadastrar(){
-    let log=document.getElementById("enterLogin").value;
-    let senha=document.getElementById("enterPass").value;
-    let user = new Usuario(log, senha);
-
-    localStorage.setItem(user.login, JSON.stringify(user));
-
+function pagLogin() {
     location.href="login.html"
+}
+
+function cadastrar(){
+    let log = document.getElementById("enterLogin").value;
+    let senha = document.getElementById("enterPass").value;
+    let confirmaSenha = document.getElementById("confirm_enterPass").value;
+    let novoUsuario = new Usuario(log, senha);
+    let userExistente = JSON.parse(localStorage.getItem(log)); 
+
+    if(!log || !senha || !confirmaSenha){
+        aviso("Favor informar todos os campos.");
+    }else if (userExistente) {
+        aviso("Usuario já Cadastrado.");
+    }else if(senha !== confirmaSenha){
+        aviso("Senhas não coincidem.");
+    }else {
+        localStorage.setItem(novoUsuario.login, JSON.stringify(novoUsuario));
+        sessionStorage.user = log;
+        location.href="index.html";
+    }
 }
 
 function login(){
@@ -58,8 +72,8 @@ function novaTarefa() {
     var tmpUserario = JSON.parse(localStorage.getItem(sessionStorage.user));
     
     tmpUserario.todasTarefas.push(itemTarefa);
-    console.log(tmpUserario);
     localStorage.setItem(tmpUserario.login, JSON.stringify(tmpUserario));
+    novaTarefa.value = '';
     
     tarefasAtivas();
 }
@@ -245,12 +259,11 @@ function atualizaLi() {
     }else if(listaAtual === 'todas'){
         tarefasTodas();
     }
-}    
+}
 
 function escondeDiv() {
     document.getElementById("popup").style.display = "none";
 }
-
 
 function efeitoBtn(btnClicado){
     var todosBtn = document.querySelectorAll('#tarefasTodas, #tarefasAtivas, #tarefasCompletas');
@@ -278,6 +291,12 @@ function aviso(msg){
 function exibeNomeUsuario() {
     let span = document.querySelector('#span-nome-usuario');
     span.innerHTML = "Olá "+sessionStorage.user;
+}
+
+function existeSessao(){
+    if (!sessionStorage.user) {
+        location.href = "login.html";
+    }
 }
 
 function sair() {
