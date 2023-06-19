@@ -1,24 +1,18 @@
 const temperatura = document.querySelector('#temperatura');
 const clima = document.querySelector('#clima');
+const climaImg = document.querySelector('#climaImg');
 
 function pesquisaClima(){
   var input = document.querySelector('#nomeCidade');
   var input = "Campo Grande";
-
-//   if (!input.value) {
-//     const div = document.querySelector('#aviso');
-//     div.style.display = 'block';
-//     return 
-//   }
-
-//   buscaDadosDoClima(input.value);
   buscaDadosDoClima(input);
 
 }
 
 
 async function buscaDadosDoClima(nomeCidade) {
-  let url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(nomeCidade)}&units=metric&appid=795b1dcdec46078dd3dfb567d089110b`;
+  let url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(nomeCidade)}&units=metric&appid=795b1dcdec46078dd3dfb567d089110b&lang=pt_br
+`;
 
   try {
     await fetch(url)
@@ -36,7 +30,7 @@ async function buscaDadosDoClima(nomeCidade) {
 }
 
 function mostraDadosDoClima(data) {
-  // console.log(data);
   temperatura.innerHTML = Math.floor(data.main.temp)+"° C";
-  clima.innerHTML = data.weather[0].main;
+  clima.innerHTML = data.weather[0].description;
+  climaImg.setAttribute("src", "http://openweathermap.org/img/wn/"+data.weather[0].icon+".png");
 }
