@@ -10,8 +10,14 @@
     
     <title>Document</title>
 </head>
-<body onload="pesquisaClima(); tarefasTodas()">
-    <header class="header">Lista de Tarefas <span onclick="sair()" >Sair</span></header>
+<body onload="pesquisaClima(); tarefasTodas(); exibeNomeUsuario()">
+    <header class="header">
+        <div class="div-display-flex">
+            <span class="span-usuario" id="span-nome-usuario">Olá</span>
+            <span>Lista de Tarefas</span>
+            <button class="btn-sair" onclick="sair()" >Sair</button>
+        </div>
+    </header>
     <main class="main">
         <div class="row">
             
@@ -43,6 +49,7 @@
 
 
                 <div class="div-no-pe">
+                    <img src="#" alt="clima" id="climaImg">
                     <div class="" id="clima">
                     </div>
                     <div class="" id="temperatura">
